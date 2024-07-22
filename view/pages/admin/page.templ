@@ -1,0 +1,48 @@
+package admin
+import (
+	page "github.com/jetnoli/go-admin/view/components/page"
+)
+
+var modules = []string{
+    "Users",
+}
+
+templ Page() {
+	@page.Page(&page.PageProps{
+		StyleSheetPath: "admin.css",
+	}) {
+        <div class="container">
+            <div class="admin-page">
+                <div class="admin-module-container">
+                    // Loop Through Modules
+                        for _, module := range modules{
+                            <div> 
+                                <p> {module} </p>
+                            </div>
+                        }
+                </div>
+                <div class="admin-list-container">
+                    // Loop Through List Items
+                     <!-- Loop Through List Items -->
+                    <ul class="admin-list">
+                        <li class="admin-list-item">
+                            <div class="item-header">
+                                <h3>Item Title 1</h3>
+                                <button class="edit-button">Edit</button>
+                            </div>
+                            <p class="item-description">Description of item 1...</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="admin-item-container">
+                    // Show Detailed Item View
+                    // Update/Edit/Delete
+                </div>
+                <div class="admin-create-item-button">
+                    //Floating Action Button
+                    +
+                </div>
+            </div>
+        </div>
+    }
+}

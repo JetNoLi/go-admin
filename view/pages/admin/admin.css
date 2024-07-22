@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+}
+
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.admin-module-container,
+.admin-list-container,
+.admin-item-container {
+    background-color: #ffffff;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout Styles */
+.admin-module-container {
+    flex: 1;
+}
+
+.admin-list-container {
+    flex: 2;
+}
+
+.admin-item-container {
+    flex: 3;
+}
+
+/* Floating Action Button */
+.admin-create-item-button {
+    position: fixed;
+    bottom: 12.5%;
+    right: 10%;
+    z-index: 100;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.admin-create-item-button:hover {
+    background-color: #0056b3;
+}
+
+.admin-create-item-button:active {
+    background-color: #004494;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .admin-page {
+        flex-direction: row;
+    }
+
+    .admin-module-container,
+    .admin-list-container,
+    .admin-item-container {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+
+    .admin-module-container {
+        flex: 1;
+        margin-right: 20px;
+    }
+
+    .admin-list-container {
+        flex: 2;
+        margin-right: 20px;
+    }
+
+    .admin-item-container {
+        flex: 3;
+    }
+}
+
+/* Color Scheme */
+:root {
+    --blue: #007bff;
+    --dark-blue: #0056b3;
+    --light-blue: #f0f8ff;
+    --grey: #d3d3d3;
+    --dark-grey: #a9a9a9;
+}
+
+/* Applying Color Scheme */
+.admin-module-container {
+    background-color: var(--light-blue);
+    border-color: var(--grey);
+}
+
+.admin-list-container {
+    background-color: var(--light-blue);
+    border-color: var(--grey);
+}
+
+.admin-item-container {
+    background-color: var(--light-blue);
+    border-color: var(--grey);
+}
