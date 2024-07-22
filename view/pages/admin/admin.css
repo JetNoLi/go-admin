@@ -1,8 +1,6 @@
+/* Base Styles */
 body {
-    font-family: Arial, sans-serif;
     background-color: #f0f2f5;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
@@ -11,39 +9,111 @@ body {
 
 .admin-page {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100%;
+    width: 100%;
+    padding: var(--xsm);
+    gap: var(--sm)
 }
 
-.admin-module-container,
-.admin-list-container,
-.admin-item-container {
-    background-color: #ffffff;
-    border: 1px solid #d3d3d3;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Layout Styles */
-.admin-module-container {
+/* Admin Module List Container */
+.admin-module-list-container {
+    border: 1px solid var(--grey);
+    border-radius: var(--br-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--xxsm);
     flex: 1;
 }
 
-.admin-list-container {
-    flex: 2;
+.module-list-item {
+    background-color: #ffffff;
+    border: 1px solid var(--grey);
+    border-radius: var(--br-md);
+    height: 6.5%;
+    max-height: 75px;
+    padding: 0 var(--sm);
+    display: flex;
+    align-items: center;
 }
 
+.module-list-item-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Admin Module Content */
+.admin-module-content {
+    display: flex;
+    flex-direction: row;
+    flex: 5;
+    gap: var(--sm)
+}
+
+/* Admin List Container */
+.admin-list-container {
+    background-color: #ffffff;
+    border: 1px solid var(--grey);
+    border-radius: var(--br-md);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.admin-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-list-item {
+    padding: var(--lg);
+    border-bottom: 1px solid #d3d3d3;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-list-item:last-child {
+    border-bottom: none;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-button {
+    background-color: var(--blue);
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: var(--br-sm);
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: var(--dark-blue);
+}
+
+.item-description {
+    margin: 10px 0 0 0;
+    color: #666666;
+}
+
+/* Admin Item Container */
 .admin-item-container {
+    background-color: #ffffff;
+    border: 1px solid var(--grey);
+    border-radius: var(--br-md);
+    padding: 20px;
     flex: 3;
 }
 
 /* Floating Action Button */
 .admin-create-item-button {
     position: fixed;
-    bottom: 12.5%;
-    right: 10%;
+    bottom: 75px;
+    right: 60px;
     z-index: 100;
     background-color: #007bff;
     color: #ffffff;
@@ -56,6 +126,9 @@ body {
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    font-size: 24px;
+    text-align: center;
+    line-height: 60px;
 }
 
 .admin-create-item-button:hover {
@@ -67,32 +140,29 @@ body {
 }
 
 /* Responsive Styles */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .admin-page {
         flex-direction: row;
     }
 
-    .admin-module-container,
-    .admin-list-container,
-    .admin-item-container {
-        margin-bottom: 0;
-        margin-right: 20px;
+    .admin-module-list-container {
+        flex: 1;
     }
 
-    .admin-module-container {
-        flex: 1;
-        margin-right: 20px;
+    .admin-module-content {
+        flex: 3;
+        flex-direction: row;
+        gap: 20px;
     }
 
     .admin-list-container {
-        flex: 2;
         margin-right: 20px;
     }
 
     .admin-item-container {
         flex: 3;
     }
-}
+} */
 
 /* Color Scheme */
 :root {
@@ -101,20 +171,19 @@ body {
     --light-blue: #f0f8ff;
     --grey: #d3d3d3;
     --dark-grey: #a9a9a9;
-}
 
-/* Applying Color Scheme */
-.admin-module-container {
-    background-color: var(--light-blue);
-    border-color: var(--grey);
-}
+    --xxsm: .1rem;
+    --xsm: .25rem;
+    --sm: .5rem;
+    --md: .75rem;
+    --lg: 1rem;
+    --xlg: 1.25rem;
+    --xxlg: 1.5rem;
+    --xxxlg: 2rem;
 
-.admin-list-container {
-    background-color: var(--light-blue);
-    border-color: var(--grey);
-}
+    --br-sm: 2px;
+    --br-md: 4px;
+    --br-lg: 8px;
+    --br-xlg: 12px;
 
-.admin-item-container {
-    background-color: var(--light-blue);
-    border-color: var(--grey);
 }

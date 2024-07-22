@@ -5,6 +5,13 @@ import (
 
 var modules = []string{
     "Users",
+    "Categories",
+    "Module 3",
+}
+
+var items = []string {
+    "Item 1",
+    "Item 2",
 }
 
 templ Page() {
@@ -13,33 +20,42 @@ templ Page() {
 	}) {
         <div class="container">
             <div class="admin-page">
-                <div class="admin-module-container">
+                <div class="admin-module-list-container">
                     // Loop Through Modules
                         for _, module := range modules{
-                            <div> 
-                                <p> {module} </p>
+                             <div class="module-list-item">
+                                <div class="module-lits-item-icon">
+                                    <!-- Replace with your icon -->
+                                    // <img src="icon1.png" alt="Icon 1">
+                                </div>
+                                <h3>{module}</h3>
                             </div>
                         }
                 </div>
-                <div class="admin-list-container">
-                    // Loop Through List Items
-                     <!-- Loop Through List Items -->
-                    <ul class="admin-list">
-                        <li class="admin-list-item">
-                            <div class="item-header">
-                                <h3>Item Title 1</h3>
-                                <button class="edit-button">Edit</button>
-                            </div>
-                            <p class="item-description">Description of item 1...</p>
-                        </li>
-                    </ul>
+                <div class="admin-module-content">
+                     <div class="admin-list-container">
+                          <!-- Loop Through List Items -->
+                         <ul class="admin-list">
+                             for _, item := range items{
+
+                                 <li class="admin-list-item">
+                                 <div class="item-header">
+                                     <h3>{ item }</h3>
+                                     <button class="edit-button">Edit</button>
+                                 </div>
+                                 <p class="item-description">Description of {item}...</p>
+                             </li>
+                             }
+                         </ul>
+                     </div>
+
+                    <div class="admin-item-container">
+                        // Show Detailed Item View
+                        // Update/Edit/Delete
+                    </div>
                 </div>
-                <div class="admin-item-container">
-                    // Show Detailed Item View
-                    // Update/Edit/Delete
-                </div>
+                //Floating Action Button
                 <div class="admin-create-item-button">
-                    //Floating Action Button
                     +
                 </div>
             </div>
