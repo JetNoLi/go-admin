@@ -7,6 +7,7 @@ import (
 
 	"github.com/jetnoli/go-admin/db/models/user"
 	"github.com/jetnoli/go-admin/services"
+	"github.com/jetnoli/go-admin/view/components/module"
 )
 
 func SignUp(w http.ResponseWriter, r *http.Request) {
@@ -49,15 +50,31 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Add("Content-Type", "application/json")
+	resType, ok := r.Header["Response-Type"]
 
-	err = json.NewEncoder(w).Encode(&users)
+	if !ok {
+		resType = []string{"htmx"}
+	}
 
-	if err != nil {
-		http.Error(w, "Error Returning Users: "+err.Error(), http.StatusInternalServerError)
+	if resType[0] == "json" {
+		w.Header().Add("Content-Type", "application/json")
+
+		err = json.NewEncoder(w).Encode(&users)
+
+		if err != nil {
+			http.Error(w, "Error Returning Users: "+err.Error(), http.StatusInternalServerError)
+		}
+
 		return
 	}
 
+	// Assume resType == "htmx"
+	component := module.UserItemList(users)
+	err = component.Render(r.Context(), w)
+
+	if err != nil {
+		http.Error(w, "Error Rendering Users List: "+err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func GetUserById(w http.ResponseWriter, r *http.Request) {
@@ -77,13 +94,38 @@ func GetUserById(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Add("Content-Type", "application/json")
+	resType, ok := r.Header["Response-Type"]
 
-	err = json.NewEncoder(w).Encode(&user)
+	if !ok {
+		resType = []string{"htmx"}
+	}
+
+	if resType[0] == "json" {
+		w.Header().Add("Content-Type", "application/json")
+
+		err = json.NewEncoder(w).Encode(&user)
+
+		if err != nil {
+			http.Error(w, "Error Returning User: "+err.Error(), http.StatusInternalServerError)
+		}
+
+		return
+	}
+
+	query := r.URL.Query()
+	asList := query.Get("as_list")
+
+	// Assume resType == "htmx"
+	component := module.UserDetail(*user)
+
+	if asList == "true" {
+		component = module.UserListItem(*user)
+	}
+
+	err = component.Render(r.Context(), w)
 
 	if err != nil {
-		http.Error(w, "Error Returning User: "+err.Error(), http.StatusInternalServerError)
-		return
+		http.Error(w, "Error Rendering User: "+err.Error(), http.StatusInternalServerError)
 	}
 }
 
@@ -115,14 +157,32 @@ func UpdateUserById(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Add("Content-Type", "application/json")
+	resType, ok := r.Header["Response-Type"]
 
-	err = json.NewEncoder(w).Encode(&user)
+	if !ok {
+		resType = []string{"htmx"}
+	}
 
-	if err != nil {
-		http.Error(w, "Error Returning User: "+err.Error(), http.StatusInternalServerError)
+	if resType[0] == "json" {
+		w.Header().Add("Content-Type", "application/json")
+
+		err = json.NewEncoder(w).Encode(&user)
+
+		if err != nil {
+			http.Error(w, "Error Returning User: "+err.Error(), http.StatusInternalServerError)
+		}
 		return
 	}
+
+	w.Header().Add("HX-Trigger", "postFormCompleted")
+
+	component := module.UserDetail(*user)
+	err = component.Render(r.Context(), w)
+
+	if err != nil {
+		http.Error(w, "Error Rendering User: "+err.Error(), http.StatusInternalServerError)
+	}
+
 }
 
 func DeleteAllUsers(w http.ResponseWriter, r *http.Request) {

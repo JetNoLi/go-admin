@@ -26,7 +26,7 @@ body {
     flex: 1;
 }
 
-.module-list-item {
+/* .module-list-item {
     background-color: #ffffff;
     border: 1px solid var(--grey);
     border-radius: var(--br-md);
@@ -40,7 +40,7 @@ body {
 .module-list-item-icon img {
     width: 40px;
     height: 40px;
-}
+} */
 
 /* Admin Module Content */
 .admin-module-content {
@@ -105,8 +105,8 @@ body {
     background-color: #ffffff;
     border: 1px solid var(--grey);
     border-radius: var(--br-md);
-    padding: 20px;
     flex: 3;
+    padding: var(--sm);
 }
 
 /* Floating Action Button */

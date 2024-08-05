@@ -34,7 +34,7 @@ func main() {
 		PreHandlerMiddleware: []Router.MiddlewareHandler{middleware.DecodeToken},
 	})
 
-	router.Handle("/user/", routes.UserRouter())
+	router.Handle("/users/", routes.UserRouter())
 	router.Handle("/auth/", routes.AuthRouter())
 	router.Handle("/", routes.HTMLRouter())
 	router.HandleFunc("/health/{$}", handlers.HealthCheck, &Router.RouteOptions{})

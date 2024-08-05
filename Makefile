@@ -17,4 +17,4 @@ dev:
 	make -j3 db/start air templ
 
 seed:
-	@go run ./models/seed.go  
+	@go run ./db/models/seed.go  

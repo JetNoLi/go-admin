@@ -8,7 +8,7 @@ import (
 )
 
 func UserRouter() *http.ServeMux {
-	router := Router.CreateRouter("/user", Router.RouterOptions{
+	router := Router.CreateRouter("/users", Router.RouterOptions{
 		ExactPathsOnly: false,
 	})
 

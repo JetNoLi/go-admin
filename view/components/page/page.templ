@@ -1,6 +1,6 @@
 package components
 
-import "github.com/jetnoli/go-admin/view/components/layout"
+import components "github.com/jetnoli/go-admin/view/components/layout"
 
 type PageProps struct {
 	StyleSheetPath string
@@ -21,7 +21,8 @@ templ Page(props *PageProps) {
 			</title>
 			<script src="../assets/htmx/index.js"></script>
 			<script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
-			<link type="text/css" rel="stylesheet" href="/page/page.css/"/>
+			<script src="https://kit.fontawesome.com/713dcfea64.js" crossorigin="anonymous"></script>
+			<link type="text/css" rel="stylesheet" href="/page/page.css"/>
 			if (props.StyleSheetPath != "") {
 				<link type="text/css" rel="stylesheet" href={ props.StyleSheetPath }/>
 			}

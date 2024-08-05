@@ -1,0 +1,34 @@
+package module
+
+import (
+	"github.com/jetnoli/go-admin/db/models/user"
+	"strconv"
+)
+
+templ UserDetail(u user.User) {
+	<head>
+		<link type="text/css" rel="stylesheet" href="/module/module.css"/>
+	</head>
+	<div class="user-details-container">
+		<h1>User Detail View</h1>
+		<form
+			id="user-form"
+			hx-put={ "/users/" + strconv.Itoa(u.Id) }
+			hx-target=".user-details-container"
+			hx-swap="outerHTML"
+			hx-ext="json-enc"
+		>
+			<div class="form-content">
+				<div class="form-row-item">
+					<label for="username">Username:</label>
+					<input type="text" id="username" name="username" value={ u.Username } required/>
+				</div>
+				<div class="form-row-item">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" value={ u.Email } readonly/>
+				</div>
+			</div>
+			<input type="submit" value="Update"/>
+		</form>
+	</div>
+}
