@@ -16,9 +16,19 @@ var items = []string{
 	"Item 2",
 }
 
+type TemplModule struct {
+	Name       string
+	HxPath     string
+	HtmxMethod string
+}
+
 type PageUrlParams struct {
-	Module string
-	Id     string
+	Module     *templ.Component
+	ModuleItem *templ.Component
+}
+
+func getVal[T any](args *T) T {
+	return *args
 }
 
 templ Page(params PageUrlParams) {
@@ -33,8 +43,16 @@ templ Page(params PageUrlParams) {
 					}
 				</div>
 				<div class="admin-module-content">
-					<div class="admin-list-container"></div>
-					<div class="admin-item-container"></div>
+					<div class="admin-list-container">
+						if (params.Module != nil) {
+							@getVal(params.Module)
+						}
+					</div>
+					<div class="admin-item-container">
+						if (params.Module != nil) {
+							@getVal(params.Module)
+						}
+					</div>
 				</div>
 				//Floating Action Button
 				<div class="admin-create-item-button">

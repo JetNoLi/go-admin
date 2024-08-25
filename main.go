@@ -11,6 +11,7 @@ import (
 	"github.com/jetnoli/go-admin/db"
 	"github.com/jetnoli/go-admin/handlers"
 	"github.com/jetnoli/go-admin/middleware"
+	"github.com/jetnoli/go-admin/modules/users"
 	"github.com/jetnoli/go-admin/routes"
 	Router "github.com/jetnoli/go-router/router"
 	"github.com/jetnoli/go-router/utils"
@@ -34,7 +35,7 @@ func main() {
 		PreHandlerMiddleware: []Router.MiddlewareHandler{middleware.DecodeToken},
 	})
 
-	router.Handle("/users/", routes.UserRouter())
+	router.Handle("/users/", users.UserRouter.Mux)
 	router.Handle("/auth/", routes.AuthRouter())
 	router.Handle("/", routes.HTMLRouter())
 	router.HandleFunc("/health/{$}", handlers.HealthCheck, &Router.RouteOptions{})

@@ -37,7 +37,6 @@ func HTMLRouter() *http.ServeMux {
 		RoutePathContainsExtension: true,
 	})
 
-	//TODO: Declare Required Htmx Endpoints Here
 	router.ServeTempl(map[string]*Router.TemplPage{
 		"/": {
 			PageComponent: home.Page(),
@@ -54,6 +53,12 @@ func HTMLRouter() *http.ServeMux {
 		"/admin/": {
 			PageComponent: admin.Page(admin.PageUrlParams{}),
 		},
+		// "/admin/users/": {
+		// 	PageComponent: admin.Page(admin.PageUrlParams{Module: module.UserItemList()}),
+		// },
+		// "/admin/{module}/{id}": {
+
+		// },
 	})
 
 	return router.Mux

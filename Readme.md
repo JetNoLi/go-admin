@@ -9,3 +9,11 @@ TODO:
 7. Create Proper UI Flow for Auth Responses and Errors (i.e. return HTML for errors)
 8. Use SqlLite Instead of PostGres
 9. Add Tests
+
+
+Rethink File Structure
+
+* Modules
+  * Handlers
+  * Components
+  * Pages

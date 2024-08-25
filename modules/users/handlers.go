@@ -1,4 +1,4 @@
-package handlers
+package users
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 
 	"github.com/jetnoli/go-admin/db/models/user"
 	"github.com/jetnoli/go-admin/services"
-	"github.com/jetnoli/go-admin/view/components/module"
+	// "github.com/jetnoli/go-admin/view/components/module"
 )
 
 func SignUp(w http.ResponseWriter, r *http.Request) {
@@ -68,8 +68,8 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Assume resType == "htmx"
-	component := module.UserItemList(users)
+	// // Assume resType == "htmx"
+	component := UserItemList(users)
 	err = component.Render(r.Context(), w)
 
 	if err != nil {
@@ -116,10 +116,10 @@ func GetUserById(w http.ResponseWriter, r *http.Request) {
 	asList := query.Get("as_list")
 
 	// Assume resType == "htmx"
-	component := module.UserDetail(*user)
+	component := UserDetail(*user)
 
 	if asList == "true" {
-		component = module.UserListItem(*user)
+		component = UserListItem(*user)
 	}
 
 	err = component.Render(r.Context(), w)
@@ -176,7 +176,7 @@ func UpdateUserById(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("HX-Trigger", "postFormCompleted")
 
-	component := module.UserDetail(*user)
+	component := UserDetail(*user)
 	err = component.Render(r.Context(), w)
 
 	if err != nil {
