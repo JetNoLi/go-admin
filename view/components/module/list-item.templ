@@ -1,0 +1,41 @@
+package module
+
+import "strings"
+
+type Item struct {
+	Name string
+	Icon string
+	Id   string
+}
+
+templ ListItemTitle(item Item) {
+	<head>
+		<link type="text/css" rel="stylesheet" href="/module/module.css"/>
+	</head>
+	<div
+		class="module-list-item"
+		hx-target={ ".admin-list-container" }
+		hx-get="/users/"
+	>
+		<div class="module-list-item-icon">
+			<!-- Replace with your icon -->
+			// <img src="icon1.png" alt="Icon 1">
+			<i class="fa-solid fa-user"></i>
+		</div>
+		<h3>{ item.Name }</h3>
+	</div>
+}
+
+templ ListItem(item Item) {
+	<li
+		class="admin-list-item"
+		hx-get={ strings.ToLower(item.Name) + "/" }
+		hx-target={ ".admin-item-container" }
+	>
+		<div class="item-header">
+			<h3>{ item.Name }</h3>
+			<button class="edit-button">Edit</button>
+		</div>
+		<p class="item-description">Description of { item.Name }...</p>
+	</li>
+}

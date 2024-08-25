@@ -14,7 +14,7 @@ templ:
 	@templ generate -watch --proxy="http://localhost:3000"
 
 dev:
-	make -j5 db/start air templ
+	make -j3 db/start air templ
 
 seed:
-	@go run ./models/seed.go  
+	@go run ./db/models/seed.go  

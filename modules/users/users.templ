@@ -1,0 +1,63 @@
+package users
+
+import (
+	"github.com/jetnoli/go-admin/db/models/user"
+	"strconv"
+)
+
+templ UserDetail(u user.User) {
+	<head>
+		<link type="text/css" rel="stylesheet" href="/module/module.css"/>
+	</head>
+	<div class="user-details-container">
+		<h1>User Detail View</h1>
+		<form
+			id="user-form"
+			hx-put={ "/users/" + strconv.Itoa(u.Id) }
+			hx-target=".user-details-container"
+			hx-swap="outerHTML"
+			hx-ext="json-enc"
+		>
+			<div class="form-content">
+				<div class="form-row-item">
+					<label for="username">Username:</label>
+					<input type="text" id="username" name="username" value={ u.Username } required/>
+				</div>
+				<div class="form-row-item">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" value={ u.Email } readonly/>
+				</div>
+			</div>
+			<input type="submit" value="Update"/>
+		</form>
+	</div>
+}
+
+// Custom
+templ UserListItem(u user.User) {
+	<li
+		class="admin-list-item"
+		hx-get={ "/users/" + strconv.Itoa(u.Id) }
+		hx-target={ ".admin-item-container" }
+	>
+		<div
+			class="item-header"
+			hx-get={ "/users/" + strconv.Itoa(u.Id) + "?as_list=true" }
+			hx-trigger="postFormCompleted from:body"
+			hx-target=".admin-list-item"
+			hx-swap="outerHTML"
+		>
+			<h3>{ u.Username }</h3>
+			<button class="edit-button">Edit</button>
+		</div>
+		<p class="item-description">Email { u.Email }...</p>
+	</li>
+}
+
+templ UserItemList(users []*user.User) {
+	for _, u := range users {
+		if u != nil {
+			@UserListItem(*u)
+		}
+	}
+}

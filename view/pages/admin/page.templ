@@ -1,48 +1,64 @@
 package admin
+
 import (
+	"github.com/jetnoli/go-admin/view/components/module"
 	page "github.com/jetnoli/go-admin/view/components/page"
 )
 
 var modules = []string{
-    "Users",
+	"Users",
+	"Categories",
+	"Module 3",
 }
 
-templ Page() {
+var items = []string{
+	"Item 1",
+	"Item 2",
+}
+
+type TemplModule struct {
+	Name       string
+	HxPath     string
+	HtmxMethod string
+}
+
+type PageUrlParams struct {
+	Module     *templ.Component
+	ModuleItem *templ.Component
+}
+
+func getVal[T any](args *T) T {
+	return *args
+}
+
+templ Page(params PageUrlParams) {
 	@page.Page(&page.PageProps{
-		StyleSheetPath: "admin.css",
+		StyleSheetPath: "/admin/admin.css",
 	}) {
-        <div class="container">
-            <div class="admin-page">
-                <div class="admin-module-container">
-                    // Loop Through Modules
-                        for _, module := range modules{
-                            <div> 
-                                <p> {module} </p>
-                            </div>
-                        }
-                </div>
-                <div class="admin-list-container">
-                    // Loop Through List Items
-                     <!-- Loop Through List Items -->
-                    <ul class="admin-list">
-                        <li class="admin-list-item">
-                            <div class="item-header">
-                                <h3>Item Title 1</h3>
-                                <button class="edit-button">Edit</button>
-                            </div>
-                            <p class="item-description">Description of item 1...</p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="admin-item-container">
-                    // Show Detailed Item View
-                    // Update/Edit/Delete
-                </div>
-                <div class="admin-create-item-button">
-                    //Floating Action Button
-                    +
-                </div>
-            </div>
-        </div>
-    }
+		<div class="container">
+			<div class="admin-page">
+				<div class="admin-module-list-container">
+					for _, m:= range modules {
+						@module.ListItemTitle(module.Item{Name: m, Icon: m})
+					}
+				</div>
+				<div class="admin-module-content">
+					<div class="admin-list-container">
+						if (params.Module != nil) {
+							@getVal(params.Module)
+						}
+					</div>
+					<div class="admin-item-container">
+						if (params.Module != nil) {
+							@getVal(params.Module)
+						}
+					</div>
+				</div>
+				//Floating Action Button
+				<div class="admin-create-item-button">
+					+
+				</div>
+			</div>
+		</div>
+	}
 }

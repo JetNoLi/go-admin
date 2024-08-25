@@ -50,9 +50,15 @@ func HTMLRouter() *http.ServeMux {
 		"/signup": {
 			PageComponent: signup.Page(),
 		},
-		"/admin": {
-			PageComponent: admin.Page(),
+		"/admin/": {
+			PageComponent: admin.Page(admin.PageUrlParams{}),
 		},
+		// "/admin/users/": {
+		// 	PageComponent: admin.Page(admin.PageUrlParams{Module: module.UserItemList()}),
+		// },
+		// "/admin/{module}/{id}": {
+
+		// },
 	})
 
 	return router.Mux
